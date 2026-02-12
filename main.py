@@ -1,6 +1,14 @@
-def main():
-    print("Hello from ml!")
-
-
-if __name__ == "__main__":
-    main()
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+df = pd.read_csv("covid_toy - covid_toy.csv")
+print(df.head())
+x = df.drop('has_covid', axis=1)  
+y = df['has_covid']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+lb = LabelEncoder()
+x_train['gender']= lb.fit_transform(x_train['gender'])
+x_train['cough']= lb.fit_transform(x_train['cough'])
+x_train['city']= lb.fit_transform(x_train['city'])
+print(x_train.head())
